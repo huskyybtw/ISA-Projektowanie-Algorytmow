@@ -62,8 +62,8 @@ template<typename T>
 void Heap<T>::siftUp(int i) {
     int parentIndex = (i-1)/2 ;
 
-    // DOPUKI MAMY ELEMENTY W TABLI
-    // ORAZ PIORYTET DZIECKA JEST MNIEJSZ NISZ RODZICA
+    // DOPÓKI MAMY ELEMENTY W TABLICY
+    // ORAZ PIORYTET DZIECKA JEST MNIEJSZY NIZ RODZICA
     // PODMIENIAMY MIEJSCAMI WĘZLY
     while (i != 0 && array[i].priority < array[parentIndex].priority){
         std::swap(array[i],array[parentIndex]);

@@ -36,14 +36,16 @@ bool checkEqual (const std::string& file1, const std::string& file2) {
 template<class T>
 void shuffleArray(T array[], int size) {
     size--;
-    std::srand(std::time(nullptr)); // Seed the random number generator
+    std::srand(std::time(nullptr));
     for (int i = 0; i < size; i++) {
-        int j = std::rand() % (size+1); // Generate a random index between 0 and i (inclusive)
+        int j = std::rand() % (size+1);
         if(i != j){
-            std::swap(array[i], array[j]); // Swap elements at indices i and j
+            std::swap(array[i], array[j]);
         }
     }
 }
+
+
 void fileTest(std::string path){
     std::ifstream file(path);
     if (!file.is_open()) {
@@ -59,7 +61,7 @@ void fileTest(std::string path){
     }
 
     Heap<int>* queue = new Heap<int>(linecount);
-    Node<int> array[linecount];
+    Node<int>* array = new Node<int>[linecount];
     linecount = 0;
 
     file.clear();
@@ -94,7 +96,7 @@ void fileTest(std::string path){
     }
     auto end_Wyciagania = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> duration_Wyciagania = end_Wyciagania - start_Wyciagania;
-    std::cout << "Usuwanie z kopca trwalo: " << duration_Wpisywania.count() << " s" << std::endl;
+    std::cout << "Usuwanie z kopca trwalo: " << duration_Wyciagania.count() << " s" << std::endl;
 
     // ZAPIS ODCZYTANEJ WIADOMOSCI
     std::ofstream outputFile(path + "_output");
@@ -108,4 +110,5 @@ void fileTest(std::string path){
     }
 
     delete queue;
+    delete []array;
 }
