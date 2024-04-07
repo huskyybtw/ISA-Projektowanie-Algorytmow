@@ -1,11 +1,14 @@
-//
-// Created by Administrator on 29.03.2024.
-//
-
 #ifndef ISA_PROJEKTOWANIE_ALGORYTMOW_HEAP_H
 #define ISA_PROJEKTOWANIE_ALGORYTMOW_HEAP_H
 
-#include "Node.h"
+
+template<typename T>
+struct Node {
+    int priority;
+    T elem;
+};
+
+
 // KOPIEC ZAKLADAJACY STALA LICZBE ELEMENTOW NIE WIEKSZA OD SIZE
 template<typename T>
 class Heap {
@@ -14,18 +17,20 @@ public:
     Heap(int array_size);
     ~Heap();
 
-    void insert();
-    T getMin();
+    const T getMin();
+    void insert(const int prio,const T& t);
     T pop();
 
+    int getSize();
+    void printHeap();
 private:
     Node<T>* array;
-    int Size;;
+    int size;
+    int maxSize;
 
     // UTILITIES
-
-    void siftUp();
-    void siftDown();
+    void siftUp(int i);
+    void siftDown(int i);
 };
 
 
