@@ -1,7 +1,3 @@
-//
-// Created by marek on 26.04.2024.
-//
-
 #ifndef ISA_PROJEKTOWANIE_ALGORYTMOW_ALGORYTHMS_H
 #define ISA_PROJEKTOWANIE_ALGORYTMOW_ALGORYTHMS_H
 #include "MovieLoader.h"

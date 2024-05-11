@@ -6,7 +6,7 @@ void merge(Movie* leftArray,Movie* rightArray,Movie* arr,int sizeLeft,int sizeRi
     int rightIterator = 0;
     int resultIterator = 0;
 
-    // Merge the temporary arrays back into arr[]
+    // LACZY TABLICE
     while (leftIterator < sizeLeft && rightIterator < sizeRight) {
         if (leftArray[leftIterator].score <= rightArray[rightIterator].score) {
             arr[resultIterator] = leftArray[leftIterator];
@@ -18,14 +18,14 @@ void merge(Movie* leftArray,Movie* rightArray,Movie* arr,int sizeLeft,int sizeRi
         resultIterator++;
     }
 
-    // Copy the remaining elements of leftArray[], if any
+    // JESLI COS ZOSTALO Z LEWEJ
     while (leftIterator < sizeLeft) {
         arr[resultIterator] = leftArray[leftIterator];
         leftIterator++;
         resultIterator++;
     }
 
-    // Copy the remaining elements of rightArray[], if any
+    // JESLI COS ZOSTALO Z PRAWEJ
     while (rightIterator < sizeRight) {
         arr[resultIterator] = rightArray[rightIterator];
         rightIterator++;
@@ -56,6 +56,7 @@ Movie* mergeSort(Movie* arr,int size){
     delete[] arrRight;
     return arr;
 }
+// DO BUCKET SORTA
 void insertionSort(std::vector<Movie>& bucket) {
     for (int i = 1; i < bucket.size(); ++i) {
         Movie key = bucket[i];
@@ -67,6 +68,7 @@ void insertionSort(std::vector<Movie>& bucket) {
         bucket[j + 1] = key;
     }
 }
+
 Movie* bucketSort(Movie* arr, int size) {
     std::vector<Movie> buckets[10];
 

@@ -5,3 +5,6 @@ bucket sort jakies voodo  didntwork.cpp
     w run couty sie printuja
     w debugerze seg fault przed coutami
     jakis problem z skladnia
+
+quick sort
+    przeladowania stosu w wywołaniach rekurencyjnych

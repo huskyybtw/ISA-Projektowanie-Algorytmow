@@ -1,18 +1,10 @@
-//
-// Created by marek on 25.04.2024.
-//
-
 #include <string>
-#include <iostream>
-#include <random>
 #include "MovieLoader.h"
-#include "algorythms.h"
 #include "tests.h"
 
 int sizes[4] = {10000,100000,250000,500000};
 int main(){
     std::string path = "../movies.csv";
-    int testSize = 800000;
     MovieLoader* fileLoader = new MovieLoader(path);
 
     for(int i=0; i < 3; i++){

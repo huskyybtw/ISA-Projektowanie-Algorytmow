@@ -28,9 +28,6 @@ void test(int sort, Movie* arr, int sizeOfArray, int times) {
 
         auto end = std::chrono::high_resolution_clock::now();
         duration = end - start;
-
-        //std::cout << "SORT: " << sort << " TOOK: " << duration.count() << " seconds" << std::endl;
-
         avg += duration.count();
     }
 
