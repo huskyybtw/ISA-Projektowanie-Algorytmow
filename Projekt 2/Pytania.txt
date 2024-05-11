@@ -1,0 +1,7 @@
+Jak radzić sobie z delokowaniem pamieci w rekursywnych funckjach
+merge sort zżera ogromna ilość pamieci
+
+bucket sort jakies voodo  didntwork.cpp
+    w run couty sie printuja
+    w debugerze seg fault przed coutami
+    jakis problem z skladnia

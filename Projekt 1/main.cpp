@@ -5,8 +5,7 @@
 #include "Utilities.h"
 
 // plik .exe nie w folderze razem z plikami
-std::string basePath = "C:\\Users\\marek\\CLionProjects\\ISA-Projektowanie-Algorytmow\\Project1\\data";
-
+std::string basePath = "..\\data";
 
 int main() {
     int amount;
