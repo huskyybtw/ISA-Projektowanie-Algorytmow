@@ -1,4 +1,5 @@
 #include <string>
+#include <iostream>
 #include "MovieLoader.h"
 #include "tests.h"
 
@@ -7,12 +8,17 @@ int main(){
     std::string path = "../movies.csv";
     MovieLoader* fileLoader = new MovieLoader(path);
 
-    for(int i=0; i < 3; i++){
-      test(i,fileLoader->getData(sizes[0]),sizes[0],1);
-      test(i,fileLoader->getData(sizes[1]),sizes[1],1);
-      test(i,fileLoader->getData(sizes[2]),sizes[2],1);
-      test(i,fileLoader->getData(sizes[3]),sizes[3],1);
-      test(i,fileLoader->getData(),fileLoader->getSize(),1);
+    for(int i=0 ;i<3 ; i++) {
+        for (int j = 0; j < 4; j++) {
+            Movie *arr = test(i, fileLoader->getData(sizes[j]), sizes[j]);
+            std::cout << "AVG : " << Avg(arr, sizes[j]) <<
+                      ", MEDIAN : " << Median(arr, sizes[j]) << std::endl;
+        }
+        Movie *arr = test(i, fileLoader->getData(), fileLoader->getSize());
+        std::cout << "AVG : " << Avg(arr, fileLoader->getSize()) <<
+                  ", MEDIAN : " << Median(arr, fileLoader->getSize()) << std::endl;
     }
+
+
     delete fileLoader;
 }
