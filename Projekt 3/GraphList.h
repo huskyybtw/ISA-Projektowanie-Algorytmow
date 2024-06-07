@@ -22,9 +22,8 @@ class GraphList {
 private:
     std::vector<VertexList*> Vertexes;
     std::vector<int> Generator(int seed,int size);
-    std::unordered_multimap<int, int> DensityGenerator(int seed,int size, int max);
 
-    bool existsInMap(std::unordered_multimap<int, int>& map, int key, int value);
+    std::unordered_multimap<int, int> DensityGenerator(int seed,int size, int max);
 public:
     GraphList (int size,double density,int seed);
     ~GraphList ();

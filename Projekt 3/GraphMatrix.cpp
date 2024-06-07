@@ -14,7 +14,7 @@ GraphMatrix::GraphMatrix(int size, double density, int seed) {
     int numEdges = static_cast<int>(MaxEdges * density);
 
     std::vector<int> EdgeValues = Generator(seed, MaxEdges);
-    std::vector<int> Edges = DensityGenerator(seed + 101, MaxEdges, numEdges);
+    std::unordered_multimap<int,int> Edges = DensityGenerator(seed + 101, size, numEdges);
 
     for(int i=0 ; i<size ; i++){
         Vertexes.push_back(new VertexMartix({i,i}));
@@ -22,6 +22,16 @@ GraphMatrix::GraphMatrix(int size, double density, int seed) {
 
     Matrix.resize(size, std::vector<Edge>(size, {0, false}));
 
+    int edgeIndex = 0;
+    for (auto& i : Edges) {
+        int fromVertexIndex = i.first;
+        int toVertexIndex = i.second;
+        Matrix[fromVertexIndex][toVertexIndex] = {EdgeValues[edgeIndex], true};
+        Matrix[toVertexIndex][fromVertexIndex] = {EdgeValues[edgeIndex], true};
+        edgeIndex++;
+    }
+
+    /*
     int edgeIndex = 0;
     int iterator = 0;
     for (int i = 0; i < size; i++) {
@@ -42,6 +52,7 @@ GraphMatrix::GraphMatrix(int size, double density, int seed) {
     }
 
     std::cout << edgeIndex << std::endl;
+    */
 }
 
 int GraphMatrix::findShortestPath(int start, int end) {
@@ -83,17 +94,24 @@ GraphMatrix::~GraphMatrix(){
         delete Vertexes[i];
     }
 }
-std::vector<int> GraphMatrix::DensityGenerator(int seed, int maxEdges, int numEdges) {
-    std::vector<int> numbers(maxEdges);
-    std::iota(numbers.begin(), numbers.end(), 0);
+
+std::unordered_multimap<int, int> GraphMatrix::DensityGenerator(int seed, int size, int numEdges) {
+    std::vector<std::pair<int, int>> allPairs;
+    for (int i = 0; i < size; ++i) {
+        for (int j = i + 1; j < size; ++j) {
+            allPairs.push_back({i, j});
+        }
+    }
 
     std::mt19937 rng(seed);
-    std::shuffle(numbers.begin(), numbers.end(), rng);
+    std::shuffle(allPairs.begin(), allPairs.end(), rng);
 
-    numbers.resize(numEdges);
-    std::sort(numbers.begin(), numbers.end());
+    std::unordered_multimap<int, int> map;
+    for (int i = 0; i < numEdges; ++i) {
+        map.insert(allPairs[i]);
+    }
 
-    return numbers;
+    return map;
 }
 
 std::vector<int> GraphMatrix::Generator(int seed, int size) {

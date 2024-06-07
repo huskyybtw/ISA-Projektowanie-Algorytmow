@@ -8,4 +8,6 @@ add_executable(ISA_Projektowanie_Algorytmow main.cpp
         GraphMatrix.cpp
         GraphList.h
         GraphList.cpp
+        tests.h
+        tests.cpp
 )

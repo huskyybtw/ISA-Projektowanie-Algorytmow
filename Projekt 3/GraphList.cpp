@@ -16,6 +16,7 @@ GraphList::GraphList(int size, double density, int seed) {
     std::vector<int>EdgeValues = Generator(seed,MaxEdges);
     std::unordered_multimap<int,int> Edges = DensityGenerator(seed + 101, size, numEdges);
 
+
     for(int i=0 ; i<size ; i++){
         Vertexes.push_back(new VertexList({i,i}));
     }
@@ -39,21 +40,22 @@ GraphList::~GraphList(){
     }
 }
 
-std::unordered_multimap<int, int>GraphList::DensityGenerator(int seed,int size,int numEdges){
-    std::unordered_multimap<int, int> map;
-    std::mt19937 rng(seed);
-    std::uniform_int_distribution<int> uniform_dist(0, size-1);
-    int debug = 0;
-    for (int i = 0; i < numEdges; ++i) {
-        int key, value;
-        do {
-            key = uniform_dist(rng);
-            value = uniform_dist(rng);
-        }while (key == value || existsInMap(map, key, value));
-        debug++;
-        map.insert({key, value});
+std::unordered_multimap<int, int> GraphList::DensityGenerator(int seed, int size, int numEdges) {
+    std::vector<std::pair<int, int>> allPairs;
+    for (int i = 0; i < size; ++i) {
+        for (int j = i + 1; j < size; ++j) {
+            allPairs.push_back({i, j});
+        }
     }
-    std::cout << debug << std::endl;
+
+    std::mt19937 rng(seed);
+    std::shuffle(allPairs.begin(), allPairs.end(), rng);
+
+    std::unordered_multimap<int, int> map;
+    for (int i = 0; i < numEdges; ++i) {
+        map.insert(allPairs[i]);
+    }
+
     return map;
 }
 
@@ -111,21 +113,4 @@ void GraphList::printMatrix() {
         }
         std::cout << std::endl;
     }
-}
-
-bool GraphList::existsInMap(std::unordered_multimap<int, int>& map, int key, int value){
-    auto range = map.equal_range(key);
-    for (auto it = range.first; it != range.second; ++it) {
-        if (it->second == value) {
-            return true;
-        }
-    }
-    range = map.equal_range(value);
-    for (auto it = range.first; it != range.second; ++it) {
-        if (it->second == key) {
-            return true;
-        }
-    }
-
-    return false;
 }
